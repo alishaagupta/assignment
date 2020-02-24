@@ -1,34 +1,4 @@
-let input = [
-    {
-    "item" : "Apple",
-    "id": 1,
-    "quantity": "6"
-    },
-    {
-    "item": "Orange" ,
-    "id":2,
-    "quantity":"2"
-    },
-    {
-    "item": "Potato",
-    "quantity":"14",
-    "id":3
-    },
-    {
-    "item": "Tomato",
-    "quantity": "3",
-    "id":4
-    },
-    {
-    "item": "Cow Milk",
-    "quantity":"8" ,
-    "id":5
-    },
-    {
-    "item": "Gouda",
-    "quantity": "2",
-    "id":8
-    }
-]
+let input = "Customer Anish Kumar buys following items \nApple 6Kg, Orange 2Kg, Potato 14Kg, Tomato 3Kg, Cow Milk 8Lt, Gouda 2Kg";
+
 
 module.exports = input ;
