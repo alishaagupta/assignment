@@ -1,11 +1,11 @@
 
-// Take input
-let input = require("./input");
+const fs = require('fs');
+let input = fs.readFileSync('./input.txt').toString()
 let getItemPrice = require('./price_calculation');
-
+console.log(input)
 const customer = getCustomerName(input.split("\n")[0].split(" "));
 let finalList = [];
-
+console.log('aaaaa ',input.split("\n"))
 let inputList = input.split("\n")[1].split(", ");
 
 inputList.forEach(item => {
@@ -26,10 +26,12 @@ finalList.forEach(item => {
  
 
   let itemDetail = getItemPrice(item);
-  sum = sum + itemDetail[0];
-  finalDiscount = finalDiscount + itemDetail[1];
-  item.amount = itemDetail[0]
+  sum = sum + itemDetail[1];
+  finalDiscount = finalDiscount + itemDetail[0];
+  item.amount = itemDetail[1]
   console.log('itemm ', item)
+
+
 });
 
 function getCustomerName(line) {
