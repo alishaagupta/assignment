@@ -1,3 +1,5 @@
+// Input Dataset
+
 let product_price_list = {
     "Apple" : {"Price" : 50, "Discount": [3,1], "Discount_type" :"bogo", "Criteria": "Kg", "Subcategory" : "Fruits", "Category" :"Produce"},
     "Orange" : {"Price" : 80, "Discount": 20,"Discount_type" : "flat", "Criteria": "Kg", "Subcategory" : "Fruits", "Category" :"Produce"},
@@ -26,5 +28,3 @@ module.exports = {
     subcategory_list: subcategory_list,
     category_list: category_list
 }
-// module.exports= subcategory_list;
-// module.exports= category_list

@@ -1,6 +1,7 @@
 let data = require('./dataset');
 
 
+// Get Original and discounted price in case of Buy X Get Y
 function getPriceBogo(item){
 
     let item_data = data.product_price_list[item.name];
@@ -11,48 +12,54 @@ function getPriceBogo(item){
 
     let remainder = parseInt(item.quantity)% width
 
-    total_price = factor* item_data.Price * item_data.Discount[0] + remainder* item_data.Price
+    totalPrice = factor* item_data.Price * item_data.Discount[0] + remainder* item_data.Price
 
-    let price_arr = []
-    price_arr[0] = total_price ;
-    price_arr[1] = parseInt(item.quantity)* item_data.Price;
+    let priceArr = getPriceArray(totalPrice, item.quantity, item_data.Price)
 
-    return price_arr ;
+
+    return priceArr ;
     
 }
 
 function getPriceDiscount(item){
 
     let item_data = data.product_price_list[item.name];
+    let totalPrice = item_data.Price ;
 
-    let discount = item_data.Discount ;
-    let total_price = item_data.Price ;
+    let discount = checkItemDiscount(item) ;
+
+    totalPrice = item_data.Price - (discount/100)* item_data.Price
+
+    totalPrice= totalPrice* parseInt(item.quantity)
+
+    let priceArr = getPriceArray(totalPrice, item.quantity, item_data.Price)
+
+    return priceArr ;
+}
+
+function getPriceArray(totalPrice, quantity, itemPrice){
+
+    return [totalPrice, parseInt(quantity) * itemPrice]
+}
+
+function checkItemDiscount(item){
+    
+    let item_data = data.product_price_list[item.name];
+    let discount = item_data.Discount;
 
     if(data.subcategory_list[item_data.Subcategory].Discount > item_data.Discount){
         discount= data.subcategory_list[item_data.Subcategory].Discount
     }
-
     if(data.category_list[item_data.Category].Discount > discount){
         discount= data.category_list[item_data.Category].Discount
     }
 
-    total_price = item_data.Price - (discount/100)* item_data.Price
-
-    total_price= total_price* parseInt(item.quantity)
-
-  
-    let price_arr = []
-    price_arr[0] = total_price ;
-    price_arr[1] = parseInt(item.quantity)* item_data.Price;
-
-    return price_arr ;
+    return discount;
 }
-
-
 function getItemPrice(item){
 
-    if((item in data.product_price_list)){
-        return 0
+    if((data.product_price_list[item.name] == undefined)){
+        return [0,0];
     }else{
         if(data.product_price_list[item.name]['Discount_type'] === 'bogo'){
 
