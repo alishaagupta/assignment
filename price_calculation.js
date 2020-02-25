@@ -4,7 +4,7 @@ let data = require('./dataset');
 // Get Original and discounted price in case of Buy X Get Y
 function getPriceBogo(item){
 
-    let item_data = data.product_price_list[item.name];
+    let item_data = data.productPriceList[item.name];
 
     let width = item_data.Discount[0] + item_data.Discount[1];
 
@@ -23,16 +23,16 @@ function getPriceBogo(item){
 
 function getPriceDiscount(item){
 
-    let item_data = data.product_price_list[item.name];
-    let totalPrice = item_data.Price ;
+    let itemData = data.productPriceList[item.name];
+    let totalPrice = itemData.Price ;
 
     let discount = checkItemDiscount(item) ;
 
-    totalPrice = item_data.Price - (discount/100)* item_data.Price
+    totalPrice = itemData.Price - (discount/100)* itemData.Price
 
     totalPrice= totalPrice* parseInt(item.quantity)
 
-    let priceArr = getPriceArray(totalPrice, item.quantity, item_data.Price)
+    let priceArr = getPriceArray(totalPrice, item.quantity, itemData.Price)
 
     return priceArr ;
 }
@@ -44,24 +44,24 @@ function getPriceArray(totalPrice, quantity, itemPrice){
 
 function checkItemDiscount(item){
     
-    let item_data = data.product_price_list[item.name];
-    let discount = item_data.Discount;
+    let itemData = data.productPriceList[item.name];
+    let discount = itemData.Discount;
 
-    if(data.subcategory_list[item_data.Subcategory].Discount > item_data.Discount){
-        discount= data.subcategory_list[item_data.Subcategory].Discount
+    if(data.subcategoryList[itemData.Subcategory].Discount > itemData.Discount){
+        discount= data.subcategoryList[itemData.Subcategory].Discount
     }
-    if(data.category_list[item_data.Category].Discount > discount){
-        discount= data.category_list[item_data.Category].Discount
+    if(data.categoryList[itemData.Category].Discount > discount){
+        discount= data.categoryList[itemData.Category].Discount
     }
 
     return discount;
 }
 function getItemPrice(item){
 
-    if((data.product_price_list[item.name] == undefined)){
+    if((data.productPriceList[item.name] == undefined)){
         return [0,0];
     }else{
-        if(data.product_price_list[item.name]['Discount_type'] === 'bogo'){
+        if(data.productPriceList[item.name]['Discount_type'] === 'bogo'){
 
             return getPriceBogo(item);
         }else{

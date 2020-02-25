@@ -1,6 +1,6 @@
 // Input Dataset
 
-let product_price_list = {
+let productPriceList = {
     "Apple" : {"Price" : 50, "Discount": [3,1], "Discount_type" :"bogo", "Criteria": "Kg", "Subcategory" : "Fruits", "Category" :"Produce"},
     "Orange" : {"Price" : 80, "Discount": 20,"Discount_type" : "flat", "Criteria": "Kg", "Subcategory" : "Fruits", "Category" :"Produce"},
     "Potato" : {"Price" : 30, "Discount": [5,2],"Discount_type" :"bogo", "Criteria": "Kg", "Subcategory" : "Veg", "Category" :"Produce"},
@@ -11,20 +11,20 @@ let product_price_list = {
     "Gouda" : {"Price" : 80, "Discount": 10,"Discount_type" :"flat", "Criteria": "Kg", "Subcategory" : "Cheese", "Category" :"Dairy"}
 }
 
-let subcategory_list = {
+let subcategoryList = {
     "Fruits" : {"Discount": 18},
     "Veg": {"Discount": 5},
     "Milk": {"Discount": 20},
     "Cheese": {"Discount": 20}
 }
 
-let category_list= {
+let categoryList= {
     "Produce" : {"Discount": 10},
     "Dairy": {"Discount": 15}
 }
 
 module.exports = {
-    product_price_list: product_price_list,
-    subcategory_list: subcategory_list,
-    category_list: category_list
+    productPriceList: productPriceList,
+    subcategoryList: subcategoryList,
+    categoryList: categoryList
 }

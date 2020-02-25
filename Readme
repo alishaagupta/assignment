@@ -1,0 +1,6 @@
+The Project contains a way to create invoice for a Supermarket.
+
+1. input.txt contains the user input data
+2. dataset.js contains details of products available in the Supermarket.
+3. The price_calculation.js calculates the price of items to be bought.
+4. manipulation.js computes the invoice and provides data 

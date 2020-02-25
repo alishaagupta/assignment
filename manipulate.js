@@ -2,14 +2,17 @@
 const fs = require('fs');
 let input = fs.readFileSync('./input.txt').toString()
 let getItemPrice = require('./price_calculation');
-console.log(input)
+var data = {}
+
 const customer = getCustomerName(input.split("\n")[0].split(" "));
+
 let finalList = [];
-console.log('aaaaa ',input.split("\n"))
+
 let inputList = input.split("\n")[1].split(", ");
 
-inputList.forEach(item => {
+//Parse the text file to get products.
 
+inputList.forEach(item => {
 
   let a = splitValue(item, item.lastIndexOf(" "))
   let b = a.split(",")
@@ -20,20 +23,28 @@ inputList.forEach(item => {
   finalList.push(produce);
 });
 
+
+
 let sum = 0;
-let finalDiscount = 0;
+let discountAmount = 0;
+ data.items = []
+// Fetch price of products
+
 finalList.forEach(item => {
  
 
   let itemDetail = getItemPrice(item);
   sum = sum + itemDetail[1];
-  finalDiscount = finalDiscount + itemDetail[0];
-  item.amount = itemDetail[1]
-  console.log('itemm ', item)
+  discountAmount = discountAmount + itemDetail[0];
+  item.amount = itemDetail[0];
+
+  data.items.push(item)
 
 
 });
 
+
+// Get the customer name
 function getCustomerName(line) {
   buys_index = line.indexOf("buys");
   let name = "";
@@ -46,7 +57,45 @@ function splitValue(value, index) {
 }
 
 
-console.log("Customer:", customer);
 
-console.log("total,", sum);
-console.log('final discount ', finalDiscount)
+data.Customer = customer ;
+data.discountAmount = discountAmount;
+data.savings = sum - discountAmount ;
+data.sum = sum ;
+
+console.log('invoice data ', data)
+loadTable(data);
+
+function loadTable(data){
+   let calculated_total = 0;
+
+   window.document.getElementById('Customer').innerHTML = data.Customer
+   window.document.getElementById('discount').innerHTML = data.final_discount
+   window.document.getElementById('total').innerHTML = data.total
+   insert_Row()
+   
+   function insert_Row(){
+   for (var i = 0; i < data.items.length; i++) {
+   var x=document.getElementById('pricing').insertRow(i+1);
+   var a = x.insertCell(0);
+   var b = x.insertCell(1);
+   var c = x.insertCell(2);
+   calculated_total = calculated_total + data.items[i].amount;
+   a.innerHTML=data.items[i].name;
+   b.innerHTML=data.items[i].quantity;
+   c.innerHTML=data.items[i].amount;
+   }
+   }
+   document.getElementById('calculated_total').innerHTML = calculated_total;
+   }
+   
+
+
+
+
+
+module.exports = loadTable
+
+
+
+
